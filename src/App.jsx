@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { Suspense } from 'react'
 import NeonScene from './NeonScene'
 import PortfolioScene, { StackIcon } from './portfolioScene'
 
@@ -44,7 +45,9 @@ export default function App() {
           camera={{ position: [0, 0, 8], fov: 90 }}
           frameloop={homeVisible ? 'always' : 'never'}
         >
-          <NeonScene onEnter={() => scrollTo('about')} isVisible={homeVisible} />
+
+            <NeonScene onEnter={() => scrollTo('about')} isVisible={homeVisible} />
+
           <EffectComposer>
             <Bloom intensity={1.4} luminanceThreshold={0.2} luminanceSmoothing={0.7} mipmapBlur />
           </EffectComposer>

@@ -6,6 +6,8 @@ import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 
 // ── Constants ──────────────────────────────────────────────────────────────────
+const base = import.meta.env.BASE_URL
+
 const HOVER_COLOR = '#f50000'
 const BASE_COLOR = '#009bf5'
 
@@ -64,11 +66,13 @@ function NeonText({ children, position, color, fontSize = 1, font, isVisible }) 
 
 // ── Static background wall (your original, unchanged) ─────────────────────────
 function BrickWall() {
-  const [color, normal, roughness] = useTexture([
-    '/src/assets/Bricks058_4K-JPG_Color.jpg',
-    '/src/assets/Bricks058_4K-JPG_NormalGL.jpg',
-    '/src/assets/Bricks058_4K-JPG_Roughness.jpg',
-  ])
+  
+
+    const [color, normal, roughness] = useTexture([
+        `${base}assets/Bricks058_4K-JPG_Color.jpg`,
+        `${base}assets/Bricks058_4K-JPG_NormalGL.jpg`,
+        `${base}assets/Bricks058_4K-JPG_Roughness.jpg`,
+    ])
   ;[color, normal, roughness].forEach(t => {
     t.repeat.set(8, 4)
     t.wrapS = t.wrapT = 1000
@@ -187,13 +191,13 @@ export default function NeonScene({ onEnter, isVisible }) {
 
       {/* Neon sign */}
         {Array.from({ length: 3 }, (_, i) => (
-        <NeonText key={`textN${i}`} font="/fonts/neon2.ttf" position={[0, 2.1 - (i * 0.05), -1.9 + (i * 0.05)]} color={c} fontSize={2.7} isVisible={isVisible}>
+        <NeonText key={`textN${i}`} font={`${base}fonts/neon2.ttf`} position={[0, 2.1 - (i * 0.05), -1.9 + (i * 0.05)]} color={c} fontSize={2.7} isVisible={isVisible}>
           KONOR TROSCLAIR
         </NeonText>
       ))}
 
         {Array.from({ length: 2 }, (_, i) => (
-        <NeonText key={`textS${i}`} font="/fonts/neon2.ttf" position={[0, -0.1 - (i * 0.05), -1.9 + (i * 0.005)]} color={c} fontSize={1.} isVisible={isVisible}>
+        <NeonText key={`textS${i}`} font={`${base}fonts/neon2.ttf`} position={[0, -0.1 - (i * 0.05), -1.9 + (i * 0.005)]} color={c} fontSize={1.} isVisible={isVisible}>
           Software Engineer
         </NeonText>
       ))}    
