@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+}
+
+h1 {
+  color: white;
+  font-family: 'Arial', sans-serif;
+  flex-direction: column;
+  display: flex;
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+h1.title {
+  text-align: center;
+  justify-content: center;
+  padding-top: '80px';
+
+}
+
+p.about-text {
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+img.stack-icon {
+  width: 72px;
+  height: 72px;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes orbit {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
