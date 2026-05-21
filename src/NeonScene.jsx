@@ -43,6 +43,28 @@ function FlickerLight({ position, color, baseIntensity = 20, distance = 25, isVi
   return <pointLight ref={lightRef} position={position} color={color} intensity={baseIntensity} distance={distance} />
 }
 
+function OvalLights({ color, isVisible, centerY = 1, radiusX = 8, radiusY = 3, count = 16 }) {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => {
+        const angle = (i / count) * Math.PI * 2
+        const x = Math.cos(angle) * radiusX
+        const y = centerY + Math.sin(angle) * radiusY
+        return (
+          <FlickerLight
+            key={`oval${i}`}
+            position={[x, y, -2.5]}
+            color={color}
+            baseIntensity={5}
+            distance={8}
+            isVisible={isVisible}
+          />
+        )
+      })}
+    </>
+  )
+}
+
 // ── Neon text (unchanged) ──────────────────────────────────────────────────────
 function NeonText({ children, position, color, fontSize = 1, font, isVisible }) {
   const matRef = useRef()
@@ -118,10 +140,6 @@ function NeonButton({ label, position, color, onClick, onHover }) {
   )
 }
 
-function transitionPage() {
-  console.log('Transitioning Page...')
-}
-
 // ── Main scene ─────────────────────────────────────────────────────────────────
 export default function NeonScene({ onEnter, isVisible }) {
   // Load textures once — passed down to both BrickWall and BreakableGrid
@@ -158,7 +176,7 @@ export default function NeonScene({ onEnter, isVisible }) {
   return (
       <>
       <ambientLight intensity={0.02} />
-      <pointLight position={[0,    2.5, -2.2]} color={c} intensity={20} distance={20} />
+      {/* <pointLight position={[0,    2.5, -2.2]} color={c} intensity={20} distance={20} />
       <pointLight position={[3,    2.5, -2.2]} color={c} intensity={15} distance={20} />
       <pointLight position={[-3,   2.5, -2.2]} color={c} intensity={15} distance={20} />
       <pointLight position={[6.5,  2.5, -2.2]} color={c} intensity={5} distance={20} />
@@ -166,43 +184,41 @@ export default function NeonScene({ onEnter, isVisible }) {
       <pointLight position={[10.5,  2.5, -2.2]} color={c} intensity={5} distance={20} />
       <pointLight position={[-10.5, 2.5, -2.2]} color={c} intensity={5} distance={20} />
       <pointLight position={[14.5,  2.5, -2.2]} color={c} intensity={5} distance={20} />
-      <pointLight position={[-14.5, 2.5, -2.2]} color={c} intensity={5} distance={20} />
+      <pointLight position={[-14.5, 2.5, -2.2]} color={c} intensity={5} distance={20} /> */}
       {/* <pointLight position={[7,    2.5, -2.5]} color={c} intensity={10} distance={3}  />
       <pointLight position={[-7,   2.5, -2.5]} color={c} intensity={10} distance={3}  /> */}
       <FlickerLight position={[0, 6.5, 5.5]} color={c} baseIntensity={10} distance={3} isVisible={isVisible}/>
 
-      {Array.from({ length: 20 }, (_, i) => (
+      {/* {Array.from({ length: 8 }, (_, i) => (
         <FlickerLight key={`l${i}`} position={[-19, -10 + i * 2.5, -2.5]} color={c} baseIntensity={5} distance={25} isVisible={isVisible}/>
       ))}
-      {Array.from({ length: 20 }, (_, i) => (
+      {Array.from({ length: 8 }, (_, i) => (
         <FlickerLight key={`r${i}`} position={[19, -10 + i * 2.5, -2.5]} color={c} baseIntensity={5} distance={25} isVisible={isVisible}/>
       ))}
-      {Array.from({ length: 30 }, (_, i) => (
-        <FlickerLight key={`t${i}`} position={[-15 + i * 2.5, 13, -2.5]} color={c} baseIntensity={5} distance={25} isVisible={isVisible}/>
+      {Array.from({ length: 8 }, (_, i) => (
+        <FlickerLight key={`t${i}`} position={[-15 + i * 2.5, 13, -2.0]} color={c} baseIntensity={5} distance={25} isVisible={isVisible}/>
       ))}
-      {Array.from({ length: 30 }, (_, i) => (
+      {Array.from({ length: 8 }, (_, i) => (
         <FlickerLight key={`b${i}`} position={[-15 + i * 2.5, -13, -2.5]} color={c} baseIntensity={5} distance={25} isVisible={isVisible}/>
-      ))}
+      ))} */}
 
       {/* Background wall — always visible, bricks sit in front of it */}
       <BrickWall />
 
       
+      <OvalLights color={c} isVisible={isVisible} centerY={1} radiusX={14} radiusY={5} count={20} />
 
       {/* Neon sign */}
-        {Array.from({ length: 3 }, (_, i) => (
-        <NeonText key={`textN${i}`} font={`${base}fonts/neon2.ttf`} position={[0, 2.1 - (i * 0.05), -1.9 + (i * 0.05)]} color={c} fontSize={2.7} isVisible={isVisible}>
+        <NeonText font={`${base}fonts/neon2.ttf`} position={[0, 2, -2]} color={c} fontSize={2.0} isVisible={isVisible}>
           KONOR TROSCLAIR
         </NeonText>
-      ))}
 
-        {Array.from({ length: 2 }, (_, i) => (
-        <NeonText key={`textS${i}`} font={`${base}fonts/neon2.ttf`} position={[0, -0.1 - (i * 0.05), -1.9 + (i * 0.005)]} color={c} fontSize={1.} isVisible={isVisible}>
+        <NeonText font={`${base}fonts/neon2.ttf`} position={[0, 0, -2]} color={c} fontSize={1} isVisible={isVisible}>
           Software Engineer
         </NeonText>
-      ))}    
 
-      <NeonButton label="ENTER" 
+
+      <NeonButton label="View My Work ↓" 
                   position={[0, -2, -2]} 
                   color={c} 
                   onClick={onEnter} 

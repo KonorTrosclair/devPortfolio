@@ -25,6 +25,13 @@ h1.title {
 
 }
 
+.neon-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  /* padding-top: 80px; */
+}
+
 p.about-text {
   color: white;
   font-family: 'Arial', sans-serif;
@@ -39,6 +46,69 @@ img.stack-icon {
   height: 72px;
 }
 
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form-name,
+.contact-form-email,
+.contact-form-message {
+  background: rgba(15, 15, 15, 0.493);
+  border: 2px solid #009bf5;
+  border-radius: 8px;
+  color: #009bf5;
+  font-family: sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  padding: 12px 16px;
+  box-shadow: 0 0 8px #009bf5, 0 0 20px #009bf522, inset 0 0 8px #009bf511;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+   caret-color: #009bf5;
+}
+
+.contact-form-name:focus,
+.contact-form-email:focus,
+.contact-form-message:focus {
+  box-shadow: 0 0 12px #009bf5, 0 0 30px #009bf5, inset 0 0 12px #009bf522;
+}
+
+.contact-form-name::placeholder,
+.contact-form-email::placeholder,
+.contact-form-message::placeholder {
+  color: #009bf585;
+}
+
+.contact-form-message {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.contact-form-submit {
+  background: rgb(15, 15, 15);
+  border: 2px solid #009bf5;
+  border-radius: 8px;
+  color: #009bf5;
+  font-family: sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  padding: 12px 40px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #009bf5, 0 0 20px #009bf522;
+  transition: box-shadow 0.2s;
+  align-self: flex-end;
+}
+
+.contact-form-submit:hover {
+  box-shadow: 0 0 20px #009bf5, 0 0 40px #009bf5, inset 0 0 20px #009bf522;
+}
+
 @property --angle {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -48,4 +118,9 @@ img.stack-icon {
 @keyframes orbit {
   from { --angle: 0deg; }
   to   { --angle: 360deg; }
+}
+
+@font-face {
+  font-family: 'neon';
+  src: url('/fonts/neon2.ttf');
 }
